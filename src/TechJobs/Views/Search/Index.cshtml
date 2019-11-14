@@ -27,33 +27,41 @@
 
 <hr />
 
+
 @if (ViewBag.jobs != null)
 {
 
     <h3>@ViewBag.jobs.Count Result(s)</h3>
 
-    <table>
-        @for (int i = 0; i < ViewBag.jobs.Count; i++)
+   
+
+
+
+
+    // TODO #2 - Loop over jobs dictionary and display all job fields
+
+}
+<table>
+    @if (ViewBag.jobs != null)
+    {
+        foreach (Dictionary<string, string> job in ViewBag.jobs)
         {
-            <tr class="@(i % 2 == 0 ? "even" : "odd") ">
-                
-                <td>
-                    @ViewBag.jobs.i;
-                </td>
-                <td>
-                    @ViewBag.jobs[i];
-                </td>
-            </tr>
+            foreach (KeyValuePair<string, string> result in job)
+
+            {
+    <tr>
+        <td>@result.Key</td>
+        <td>@result.Value</td>
+
+
+
+    </tr>
+
+            }
 
         }
 
-
-
-    </table>
-
-
-    // TODO #2 - Loop over jobs dictionary and display all job fields
-}
+    }
 
 
 
@@ -64,4 +72,4 @@
 
 
     // TODO #2 - Loop over jobs dictionary and display all job fields
-}
+    }
