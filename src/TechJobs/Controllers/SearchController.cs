@@ -7,7 +7,7 @@ namespace TechJobs.Controllers
     public class SearchController : Controller
     {
 
-        //List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+        
         public IActionResult Index()
         {
             ViewBag.columns = ListController.columnChoices;
@@ -16,15 +16,26 @@ namespace TechJobs.Controllers
         }
 
     
-        //http://localhost:55958/Search/Results?searchType=location&searchTerm=portland
-        public IActionResult Results( string searchType, string searchTerm) // check names 
+        
+        public IActionResult Results( string searchType, string searchTerm) 
         {
             ViewBag.title = "Search by Term ";
             ViewBag.columns = ListController.columnChoices;
             searchTerm = searchTerm.ToLower();
-            List<Dictionary<string, string>> jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
 
-            ViewBag.jobs = jobs;
+            if (searchType== "all")
+            {
+                List<Dictionary<string, string>> jobs = JobData.FindByValue(searchTerm);
+                ViewBag.jobs = jobs;
+            }
+            else
+            { 
+
+                List<Dictionary<string, string>> jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
+                ViewBag.jobs = jobs;
+
+            }
+            
             return View("Index");
 
                             }
@@ -32,8 +43,7 @@ namespace TechJobs.Controllers
 
 
 
-        // TODO #1 - Create a Results action method to process 
-        // search request and display results
+        
 
     }
 }
