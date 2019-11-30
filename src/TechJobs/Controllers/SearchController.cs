@@ -24,7 +24,7 @@ namespace TechJobs.Controllers
             if (searchTerm == null)
                 {
                 //show all results
-                List<Dictionary<string, string>> jobs = JobData.FindAll();
+                IEnumerable<Dictionary<string, string>> jobs = JobData.FindAll();
                 ViewBag.jobs = jobs;
                  }
             else
@@ -32,13 +32,13 @@ namespace TechJobs.Controllers
                 searchTerm = searchTerm.ToLower();
                 if (searchType == "all")
                 {
-                    List<Dictionary<string, string>> jobs = JobData.FindByValue(searchTerm);
+                    IEnumerable<Dictionary<string, string>> jobs = JobData.FindByValue(searchTerm);
                     ViewBag.jobs = jobs;
                 }
                 else
                 {
 
-                    List<Dictionary<string, string>> jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
+                    IList<Dictionary<string, string>> jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
                     ViewBag.jobs = jobs;
 
                 }
